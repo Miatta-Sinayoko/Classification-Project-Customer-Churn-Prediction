@@ -25,13 +25,22 @@ Are tenure shorter for customer who churn?
 Are additional services independent with churn?
 
 # Project Plan 
-1. Data Acquisition
+#### 1. Data Acquisition
+
 Gather data from Codeup database
+
 acqure.py
-2. Data Preparation
+
+#### 2. Data Preparation
+
+prepare.py
+
 Data Cleaning
+
 Data Splitting
-3. Exploratory Analysis
+
+#### 3. Exploratory Analysis
+
 Ask questions to find what are the key variables that are driving the churn
 
 Gather and sort churn rate from each driver into .xlsx file
@@ -42,14 +51,16 @@ Create visualizations for the churn rate for each variable
 
 Explore each feature's dependency with churn and create visualization for each
 
-4. Statistical Testing & Modeling
+#### 4. Statistical Testing & Modeling
+
 Conduct T-Test for categorical variable vs. numerical variable
 
 Conduct Chi^2 Test for categorical variable vs. categorical variable
 
 Conclude hypothesis and address the initial questions
 
-5. Modeling Evaluation
+#### 5. Modeling Evaluation
+
 Create decision tree classifer and fit train dataset
 
 Find the max depth for the best performing decision tree classifer (evaluated using classification report, accuracy score)
