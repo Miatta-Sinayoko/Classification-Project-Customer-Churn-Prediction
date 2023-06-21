@@ -72,7 +72,6 @@ Pick the model with highest accuracy and evaluate on test dataset
 
 
 # Data Dictionary
-# Data Dictionary
 
 | Variable | Value | Meaning |
 |---|---|---|
