@@ -86,7 +86,7 @@ Pick the model with highest accuracy and evaluate on test dataset
 
 | Variable | Value | Meaning |
 |---|---|---|
-| Contract Type | 1) Month-to-month 2) One year 3) Two year | Indicates type of contractual agreement in place with the customer. |
+| Contract Type | 1) Month-to-month 2) One year 3) Two year | Indicates type of contractual agreement in place with customer. |
 | Device Protection | 1) Yes 2) No 3) No internet service | Indicates if customer has device protection service. |
 | Internet Service Type | 1) DSL 2) Fiber Optic 3) None | Indicates type of internet service customer has, if any. |
 | Monthly Charges | Float number | Indicates amount customer is paying each month. |
