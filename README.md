@@ -72,18 +72,21 @@ Pick the model with highest accuracy and evaluate on test dataset
 
 
 # Data Dictionary
-Variable    Value    Meaning
-Contract Type    1) Month-to-month 2) One year 3) Two year    This indicates what type of contract the customer has
-Internet Service Type    1) DSL 2) Fiber Optic 3) None    This indicates what type of internet service the customer has, if any
-Payment Type    1) Bank transfer 2) Credit card 3) Electronic check 4) Mailed check    This tells us how is the customer paying for the service
-Monthly Charges    Float number    This tells us how much is the customer paying each month
-Teunure    Integer ranging from 0-72    This shows how long (months) does the customer stay with the company
-Online Bakcup    1) Yes 2) No 3) No internet service    This indicates if the customer has online backup service
-Online Security    1) Yes 2) No 3) No internet service    This indicates if the customer has online security service
-Tech Support    1) Yes 2) No 3) No internet service    This indicates if the customer has tech support service
-Device Protection    1) Yes 2) No 3) No internet service    This indicates if the customer has device protection service
-Streaming TV    1) Yes 2) No 3) No internet service    This indicates if the customer has streaming tv service
-Streaming Movies    1) Yes 2) No 3) No internet service    This indicates if the customer has streaming movies service
+# Data Dictionary
+
+| Variable | Value | Meaning |
+|---|---|---|
+| Contract Type | 1) Month-to-month 2) One year 3) Two year | Indicates the type of contractual agreement in place with the customer. |
+| Device Protection | 1) Yes 2) No 3) No internet service | Indicates if the customer has device protection service. |
+| Internet Service Type | 1) DSL 2) Fiber Optic 3) None | Indicates the type of internet service the customer has, if any. |
+| Monthly Charges | Float number | Indicates the amount the customer is paying each month. |
+| Online Backup | 1) Yes 2) No 3) No internet service | Indicates if the customer has online backup service. |
+| Online Security | 1) Yes 2) No 3) No internet service | Indicates if the customer has online security service. |
+| Payment Type | 1) Bank transfer 2) Credit card 3) Electronic check 4) Mailed check | Indicates how the customer is paying for service. |
+| Streaming Movies | 1) Yes 2) No 3) No internet service | Indicates if the customer has streaming movies service. |
+| Streaming TV | 1) Yes 2) No 3) No internet service | Indicates if the customer has streaming TV service. |
+| Tenure | Integer ranging from 0-72 | Indicates the length of time (in months) the customer has stayed with the company. |
+
 
 
 # Steps to Reproduce
