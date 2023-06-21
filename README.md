@@ -88,8 +88,8 @@ Pick the model with highest accuracy and evaluate on test dataset
 |---|---|---|
 | Contract Type | 1) Month-to-month 2) One year 3) Two year | Indicates type of contractual agreement in place with the customer. |
 | Device Protection | 1) Yes 2) No 3) No internet service | Indicates if customer has device protection service. |
-| Internet Service Type | 1) DSL 2) Fiber Optic 3) None | Indicates type of internet service the customer has, if any. |
-| Monthly Charges | Float number | Indicates amount the customer is paying each month. |
+| Internet Service Type | 1) DSL 2) Fiber Optic 3) None | Indicates type of internet service customer has, if any. |
+| Monthly Charges | Float number | Indicates amount customer is paying each month. |
 | Online Backup | 1) Yes 2) No 3) No internet service | Indicates if customer has online backup service. |
 | Online Security | 1) Yes 2) No 3) No internet service | Indicates if customer has online security service. |
 | Payment Type | 1) Bank transfer 2) Credit card 3) Electronic check 4) Mailed check | Indicates how customer is paying for service. |
