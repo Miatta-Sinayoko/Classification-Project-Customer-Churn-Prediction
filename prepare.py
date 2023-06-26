@@ -1,45 +1,32 @@
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-
-# import splitting and imputing functions
 from sklearn.model_selection import train_test_split
-from sklearn.impute import SimpleImputer
 
-import acquire
-
-def split_telco_data(df):
+def prep_telco_churn(df):
     '''
-    This function performs split on telco data, stratify churn.
-    Returns train, validate, and test dfs.
+    This function takes in the DataFrame from get_telco_churn_data
+    and returns the DataFrame with preprocessing applied 
     '''
-    train_validate, test = train_test_split(df, test_size=.2, 
-                                        random_state=123, 
-                                        stratify=df.churn)
-    train, validate = train_test_split(train_validate, test_size=.2, 
-                                   random_state=123, 
-                                   stratify=train_validate.churn)
-    return train, validate, test
+    # Drop duplicated columns and rows
+    df = df.loc[:, ~df.columns.duplicated()]
+    df.drop_duplicates(inplace=True)
 
-def prep_telco(df):
-    # Drop duplicate columns
-    cols_to_drop = ['contract_type_id', 'internet_service_type_id', 'payment_type_id', 'payment_type_id.1', 'internet_service_type_id', 'internet_service_type_id.1']
-    df.drop(columns=cols_to_drop, inplace = True)
-    
-    # Drop null values stored as whitespace    
-    df['total_charges'] = df['total_charges'].str.strip()
-    df = df[df.total_charges != '']
-    
-    # Convert to correct datatype
-    df['total_charges'] = df.total_charges.astype(float)
-    
-    # Get dummies for categorical variables 
-    dummy_df = pd.get_dummies(df[['gender', 'partner', 'dependents', 'phone_service', 'multiple_lines', 'online_security', 'online_backup', 'device_protection', 'tech_support', 'streaming_tv', 'streaming_movies', 'paperless_billing', 'churn', 'contract_type', 'payment_type', 'internet_service_type']], dummy_na=False, drop_first=False)
-    
-    # Concatenate dummy dataframe to original
-    df = pd.concat([df, dummy_df], axis=1)
-    
-    # Drop duplicate dummies
-    cols_to_drop = ['gender_Female', 'partner_No', 'dependents_No', 'phone_service_No', 'multiple_lines_No phone service', 'online_security_No internet service', 'online_backup_No internet service', 'device_protection_No internet service', 'tech_support_No internet service', 'streaming_tv_No internet service', 'streaming_movies_No internet service', 'paperless_billing_No', 'churn_No']
-    df.drop(columns = cols_to_drop, inplace = True)
+    # Replace ' ' in 'total_charges' column with '0' and change its data type to float
+    df.total_charges = df.total_charges.replace(' ', '0').astype(float)
+
+    # Change data type for boolean columns
+    for col in ['churn', 'partner', 'dependents', 'phone_service']:
+        df[col] = df[col].map({'No': 0, 'Yes': 1})
+
     return df
+
+def split_data(df):
+    '''
+    This function takes in a DataFrame and returns train, validate, and test DataFrames.
+    '''
+    # Create train_validate and test datasets
+    train_validate, test = train_test_split(df, test_size=.2, random_state=123, stratify=df.churn)
+
+    # Split train_validate into train and validate datasets
+    train, validate = train_test_split(train_validate, test_size=.3, random_state=123, stratify=train_validate.churn)
+
+    return train, validate, test
