@@ -1,23 +1,53 @@
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier, plot_tree
-from sklearn.metrics import confusion_matrix, classification_report
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, classification_report
 import matplotlib.pyplot as plt
-from IPython.display import display
+from IPython.display import display, display_html
+from sklearn.dummy import DummyClassifier
+
+# Split our X and y
 
 def split_Xy(df, column):
+    '''
+    Split the data into X (features) and y (target) DataFrames.
+
+    Parameters:
+    - df: DataFrame containing the data.
+    - column: Name of the column representing the target variable.
+
+    Returns:
+    - X_df: DataFrame containing the features.
+    - y_df: DataFrame containing the target variable.
+    '''
     X_df = df.drop(columns=column)
-    y_df = df[column]
+    y_df = df[[column]]
     return X_df, y_df
 
+
 def model_performs(X_df, y_df, model):
+    '''
+    Fit the model, make predictions, and evaluate its performance.
+
+    Parameters:
+    - X_df: DataFrame containing the features.
+    - y_df: DataFrame containing the target variable.
+    - model: Trained classification model.
+    '''
+    # Make predictions
     pred = model.predict(X_df)
+
+    # Calculate accuracy
     acc = model.score(X_df, y_df)
+
+    # Calculate confusion matrix
     conf = confusion_matrix(y_df, pred)
     mat = pd.DataFrame(confusion_matrix(y_df, pred), index=['actual_didnt_churn', 'actual_churned'],
                        columns=['pred_didnt_churn', 'pred_churned'])
     rubric_df = pd.DataFrame([['True Negative', 'False positive'], ['False Negative', 'True Positive']],
                              columns=mat.columns, index=mat.index)
     cf = rubric_df + ': ' + mat.values.astype(str)
+
+    # Calculate true positive rate, false positive rate, true negative rate, and false negative rate
     tp = conf[1, 1]
     fp = conf[0, 1]
     fn = conf[1, 0]
@@ -26,8 +56,12 @@ def model_performs(X_df, y_df, model):
     fpr = fp / (fp + tn)
     tnr = tn / (tn + fp)
     fnr = fn / (fn + tp)
+
+    # Generate classification report
     clas_rep = pd.DataFrame(classification_report(y_df, pred, output_dict=True)).T
     clas_rep.rename(index={'0': "didnt churn", '1': "churned"}, inplace=True)
+
+    # Print the performance metrics and display the confusion matrix and classification report
     print(f'''
     The accuracy for our model is {acc:.4%}
     The True Positive Rate is {tpr:.3%},    The False Positive Rate is {fpr:.3%},
@@ -35,42 +69,30 @@ def model_performs(X_df, y_df, model):
     ________________________________________________________________________________
     ''')
     print('''
-    The positive is  'churned'
+    The positive is 'churned'
     Confusion Matrix
     ''')
     display(cf)
     print('''
     ________________________________________________________________________________
-    
+ 
     Classification Report:
     ''')
     display(clas_rep)
 
 
 def dec_tree(model, X_df):
+    '''
+    Plot a decision tree.
+
+    Parameters:
+    - model: Trained decision tree model.
+    - X_df: DataFrame containing the features.
+    '''
     plt.figure(figsize=(24, 12))
     plot_tree(
         model,
         feature_names=X_df.columns.tolist(),
-        class_names=['died', 'survived'],
+        class_names=['didnt churn', 'churned']
     )
     plt.show()
-
-
-def compare(model1, model2, X_df, y_df):
-    pred1 = model1.predict(X_df)
-    pred2 = model2.predict(X_df)
-    acc1 = model1.score(X_df, y_df)
-    acc2 = model2.score(X_df, y_df)
-    conf1 = confusion_matrix(y_df, pred1)
-    mat1 = pd.DataFrame(confusion_matrix(y_df, pred1),
-                        index=['actual_didnt_churn', 'actual_churned'],
-                        columns=['pred_didnt_churn', 'pred_churned'])
-    rubric_df = pd.DataFrame([['True Negative', 'False positive'], ['False Negative', 'True Positive']],
-                             columns=mat1.columns, index=mat1.index)
-    cf1 = rubric_df + ': ' + mat1.values.astype(str)
-    conf2 = confusion_matrix(y_df, pred2)
-    mat2 = pd.DataFrame(confusion_matrix(y_df, pred2),
-                        index=['actual_didnt_churn', 'actual_churned'],
-                        columns
-
