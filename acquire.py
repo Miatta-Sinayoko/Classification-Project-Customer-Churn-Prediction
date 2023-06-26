@@ -1,36 +1,43 @@
+# Import libraries
 import pandas as pd
-import env
-import seaborn as sns
-import requests
+import numpy as np
 import os
+from pydataset import data
 
-def get_connection(db, user=env.user, host=env.host, password=env.password):
-    return f'mysql+pymysql://{user}:{password}@{host}/{db}'
+# Acquire
+from env import host, user, password
 
-def new_telco_data():
-    query = '''
-    Select *
-    from customers JOIN contract_types USING(contract_type_id) JOIN payment_types ON customers.payment_type_id = payment_types.payment_type_id
-    JOIN internet_service_types ON customers.internet_service_type_id = internet_service_types.internet_service_type_id;
-    '''
-    return pd.read_sql(query, get_connection('telco_churn'))
 
-def get_telco_data():
+# Create helper function to get the necessary connection url
+def get_connection(db_name):
     '''
-    This function reads in iris data from Codeup database, writes data to
-    a csv file if a local file does not exist, and returns a df.
+    This function uses my info from my env file to
+    create a connection url to access the Codeup db.
     '''
-    if os.path.isfile('telco.csv'):
-        
-        # If csv file exists read in data from csv file.
-        df = pd.read_csv('telco.csv', index_col=0)
-        
-    else:
-        
-        # Read fresh data from db into a DataFrame
-        df = new_telco_data()
-        
-        # Cache data
-        df.to_csv('telco.csv')
-        
-    return df
+    return f'mysql+pymysql://{user}:{password}@{host}/{db_name}'
+
+# Create function to retrieve telco_churn data
+
+def get_telco_churn_data():
+    '''
+    This function reads in the Telco Churn data from the Codeup db
+    and returns a pandas DataFrame with all columns.
+    '''
+    sql_query = '''
+    SELECT *
+    FROM customers
+    JOIN contract_types ON customers.contract_type_id = contract_types.contract_type_id
+    JOIN payment_types ON customers.payment_type_id = payment_types.payment_type_id
+    JOIN internet_service_types ON customers.internet_service_type_id = internet_service_types.internet_service_type_id
+    '''
+    return pd.read_sql(sql_query, get_connection('telco_churn'))
+
+# Now, you can simply call get_telco_churn_data function to retrieve the data.
+df = get_telco_churn_data()
+
+# To inspect the first few rows of the DataFrame, you can use the head function.
+print(df.head())n pd.read_sql(sql_query, get_connection('telco_churn'))
+
+    
+    
+    
