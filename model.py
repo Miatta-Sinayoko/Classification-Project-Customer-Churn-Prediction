@@ -94,5 +94,4 @@ def dec_tree(model, X_df):
         feature_names=X_df.columns.tolist(),
         class_names=['didnt churn', 'churned']
     )
-    plt.show()
-
+    plt.show()      
