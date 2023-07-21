@@ -99,13 +99,31 @@ Pick the model with highest accuracy and evaluate on test dataset
 
 
 
-# Steps to Reproduce
- 
- 
-### Key Findings
+# Conclusion Summary 
+
+- Three features  selected based on their visual significance and chi-square statistical testing for training the Classification Model to determine their significant relationship to churn.
+- Senior Citizen Hypothesis - We reject the Null Hypothesis, senior citizen status is dependent on customer churn.
+- Tenure Hypothesis - We reject the Null Hypothesis, tenure is dependent on customer churn. 
+- Internet Service Hypothesis We reject the Null Hypothesis, internet service type is is dependent on customer churn.
+- Decision Tree, Logistic Regression, and Random Forest models were implemented with a Random Seed of 40 to avoid overfitting.
+- The Deceision and Logistic Regression model outperformed the baseline accuracy of 73% and consistently. Decision Tree Model was selected as Top Model and achieved an accuracy of approximately 80% on the train, validate, and test sets.
 
 
-# Recommendations
+# Recommendations 
+1. Telco should focus on retaining senior citizens by providing them with senior citizen discounts or services.
+2. Telco should focus on retaining customers with long tenure by providing them with loyalty programs or other incentives.
+3. Telco should focus on improving the internet service speeds for customers with DSL orand coverage and bundle deals  for customers with no internet service.
+
+# Takeaways
+1. The factors of senior citizen status, tenure, and internet service type can influence customer churn at Telco.
+
+2. Telco should focus on retaining customers who are more likely to churn by providing them with special discounts, service upgrades, or incentives
+
+3. Improving these factors can reduce churn rates.
 
 
-### Next Steps
+# Sources
+
+1. Carter, A. (2023). Classification Project. GitHub. Retrieved from https://github.com/annie-carter/classification_project
+
+
